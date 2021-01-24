@@ -8,36 +8,25 @@ import './App.css';
 function App() {
 
   const [view, setView] = useState("uk");
-  const [ukVars, setUKVars] = useState({});
-  const [ukData, setUKData] = useState({});
-  const [worldVars, setWorldVars] = useState({});
-  const [worldData, setWorldData] = useState({});
+  const [data, setData] = useState({});
+  const [vars, setVars] = useState({});
 
   useEffect(() => {
-    fire.database().ref("uk").on("value", snapshot => {
-      setUKData(snapshot.val().data);
-      setUKVars(snapshot.val().vars);
+    fire.database().ref(view).on("value", snapshot => {
+      setData(snapshot.val().data);
+      setVars(snapshot.val().vars);
     });
-    fire.database().ref("world").on("value", snapshot => {
-      setWorldData(snapshot.val().data);
-      setWorldVars(snapshot.val().vars);
-    });
-    // fire.database().ref("data").on("value", snapshot => {
-    //   setUKData(snapshot);
-    // });
-  }, []);
+  }, [view]);
 
   return (
     <div className="App">
       <header id="header">
         <Button click={() => setView("uk")} text="UK" view={view} size="large" />
-        <Button click={() => setView("vaccines")} text="Vaccines" view={view} size="large" />
+        {/* <Button click={() => setView("vaccines")} text="Vaccines" view={view} size="large" /> */}
         <Button click={() => setView("world")} text="World" view={view} size="large" />
       </header>
-      {view === "uk" && <Page view={view} data={ukData} />}
-      {/* {view === "vaccines" && <Page view={view} data={{}} />} */}
-      {/* {view === "world" && <Page view={view} data={{}} />} */}
-      <Settings />
+      <Page view={view} data={data} />
+      <Settings vars={vars} />
     </div>
   );
 }
