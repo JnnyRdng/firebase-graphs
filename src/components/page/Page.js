@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react';
 import "./Page.css";
 import Graph from "./Graph";
 import SpreadSheet from "../spreadsheet/SpreadSheet";
-export default function Page({ view, vars, data, whichCountry }) {
+export default function Page({ view, vars, data, whichCountry, type }) {
 
-  // const [vars, setVars] = useState(undefined);
 
-  useEffect(() => {
-    // firebase.vars().on("value", snapshot => {
-    //   setVars(snapshot.val());
-    // });
-  }, []);
+  // bring this into a helper and use in App
+  const reformatForTable = (data) => {
+    const d = JSON.parse(JSON.stringify(data));
+    return Object.keys(d).map(key => {
+      return d[key];
+    });
+  }
+
 
   return (
     <div id="contents">
       <h2>{view.toUpperCase()}</h2>
-      {/* <p>{JSON.stringify(vars)}</p> */}
       <main>
-        {/* <p>{JSON.stringify(data, null, 2)}</p> */}
-        <Graph />
-        <SpreadSheet data={data} whichCountry={whichCountry} />
+        <Graph data={reformatForTable(data)} vars={vars} type={type} />
+        <SpreadSheet data={data} whichCountry={whichCountry} type={type} />
       </main>
     </div>
   )

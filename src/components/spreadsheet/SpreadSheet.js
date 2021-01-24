@@ -1,24 +1,15 @@
 import { HotTable } from '@handsontable/react';
 import 'handsontable/dist/handsontable.full.css';
 import "./SpreadSheet.css";
-import Handsontable from 'handsontable';
 import { useEffect, useState } from 'react';
 
-export default function SpreadSheet({ data, whichCountry }) {
-
-  const [cells, setCells] = useState([[]]);
+export default function SpreadSheet({ data, whichCountry, type }) {
 
   useEffect(() => {
 
   }, [data]);
 
-  const dummy = [
-    ['', 'Tesla', 'Mercedes', 'Toyota', 'Volvo'],
-    ['2019', 10, 11, 12, 13],
-    ['2020', 20, 11, 14, 13],
-    ['2021', 30, 15, 12, 13]
-  ];
-
+  // bring this into a helper and use in App
   const reformatForTable = (data) => {
     const d = JSON.parse(JSON.stringify(data));
     return Object.keys(d).map(key => {
@@ -30,17 +21,15 @@ export default function SpreadSheet({ data, whichCountry }) {
     data: reformatForTable(data),
     columns: [
       { data: 'date', type: 'date', dateFormat: 'DD/MM/YYYY' },
-      { data: "cases", type: "numeric" },
-      { data: "deaths", type: "numeric" },
-      { data: "tests", type: "numeric" },
-      // { data: "vaccines", type: "numeric" },
+      { data: type, type: "numeric" },
+      { data: `showVal.${type}`, type: "checkbox", checkedTemplate: 1, uncheckedTemplate: 0 },
     ],
     stretchH: "all",
     height: "75%",
     width: 400,
     contextMenu: true,
     rowHeaders: false,
-    colHeaders: ["date", "cases", "deaths", "tests"],
+    colHeaders: ["date", type, `show ${type}`],
     licenseKey: 'non-commercial-and-evaluation',
     minSpareRows: 1,
     beforePaste: function (changes, source) {

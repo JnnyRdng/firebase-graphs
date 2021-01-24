@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./Settings.css";
 import { Button, Slider } from "../ui/UIElements";
 
-export default function Settings({ vars, options, setWhichCountry }) {
+export default function Settings({ vars, options, setWhichCountry, type, setType }) {
 
   const [hidden, setHidden] = useState(false);
   const [arrow, setArrow] = useState("<");
@@ -15,7 +15,7 @@ export default function Settings({ vars, options, setWhichCountry }) {
       <div id="controls">
         {
           vars.headings.map(heading => (
-            <Button key={heading} text={heading} click={() => true} view={vars.data_type} />
+            <Button key={heading} text={heading} click={() => setType(heading)} view={type} />
           ))
         }
         {options.length > 0 &&

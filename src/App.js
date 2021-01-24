@@ -11,6 +11,7 @@ function App() {
   const [data, setData] = useState({});
   const [vars, setVars] = useState({});
   const [options, setOptions] = useState([]);
+  const [type, setType] = useState("cases");
   const [whichCountry, setWhichCountry] = useState("");
 
   useEffect(() => {
@@ -41,9 +42,11 @@ function App() {
         data={
           view === "world" ? (data[whichCountry] ? data[whichCountry] : {}) : data
         }
+        vars={vars}
         whichCountry={whichCountry ? whichCountry : "United Kingdom"}
+        type={type}
       />
-      {Object.keys(vars).length && <Settings vars={vars} options={options} setWhichCountry={setWhichCountry} />}
+      {Object.keys(vars).length && <Settings vars={vars} options={options} setWhichCountry={setWhichCountry} type={type} setType={setType} />}
     </div>
   );
 }
