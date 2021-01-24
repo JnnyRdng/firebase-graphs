@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import "./Page.css";
 import Graph from "./Graph";
+import SpreadSheet from "./SpreadSheet";
 export default function Page({ view, vars }) {
 
   // const [vars, setVars] = useState(undefined);
@@ -16,6 +17,7 @@ export default function Page({ view, vars }) {
       <h2>{view.toUpperCase()}</h2>
       <p>{JSON.stringify(vars)}</p>
       <Graph />
+      <SpreadSheet />
     </div>
   )
 }
