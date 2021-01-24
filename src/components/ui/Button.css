@@ -1,0 +1,40 @@
+.ui-button {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: tomato;
+  color: black;
+  margin: 4px;
+  border-radius: 6px;
+  border: 0px solid white;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s;
+}
+
+.ui-button:hover {
+  background-color: orangered;
+  color: white;
+}
+
+.ui-button:active {
+  background-color: rgb(199, 68, 68);
+  color: black;
+}
+
+.ui-button-large {
+  width: 300px;
+  height: 30px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.ui-button-small {
+  width: 140px;
+  height: 20px;
+  font-size: medium;
+  font-weight: normal;
+}
+
+.current {
+  background-color: firebrick;
+  color: white;
+}
