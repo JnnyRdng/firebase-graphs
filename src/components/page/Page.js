@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import "./Page.css";
 import Graph from "./Graph";
 import SpreadSheet from "./SpreadSheet";
-import Settings from "./Settings";
-import { Button, Slider } from "../ui/UIElements";
 export default function Page({ view, vars, data }) {
 
   // const [vars, setVars] = useState(undefined);
@@ -23,7 +21,6 @@ export default function Page({ view, vars, data }) {
         <Graph />
         <SpreadSheet data={data} />
       </main>
-      <Settings vars={vars} />
     </div>
   )
 }
