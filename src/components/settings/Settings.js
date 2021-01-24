@@ -2,23 +2,40 @@ import { useState } from "react"
 import "./Settings.css";
 import { Button, Slider } from "../ui/UIElements";
 
-export default function Settings({ vars }) {
+export default function Settings({ vars, options, setWhichCountry }) {
 
   const [hidden, setHidden] = useState(false);
   const [arrow, setArrow] = useState("<");
+
   return (
     <div
       id="settings-box"
       style={{ left: hidden ? -770 : 0 }}
     >
       <div id="controls">
-        <Button size="small" text="button" click={() => true} />
-        <Slider />
+        {
+          vars.headings.map(heading => (
+            <Button key={heading} text={heading} click={() => true} view={vars.data_type} />
+          ))
+        }
+        {options.length > 0 &&
+          (
+            <>
+              <label htmlFor="data_select">Country: </label>
+              <select id="data_select" onChange={({ target }) => setWhichCountry(target.value)}>
+                {options.map(option => <option key={option} value={option} >{option}</option>)}
+              </select>
+            </>
+          )
+        }
       </div>
-      <div id="arrow_click" onClick={() => {
-        setHidden(!hidden);
-        setArrow(arrow === ">" ? "<" : ">");
-      }}>
+      <div
+        id="arrow_click"
+        onClick={() => {
+          setHidden(!hidden);
+          setArrow(arrow === ">" ? "<" : ">");
+        }}
+      >
         {arrow}
       </div>
     </div>

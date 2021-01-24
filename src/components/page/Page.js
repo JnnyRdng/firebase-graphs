@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import "./Page.css";
 import Graph from "./Graph";
-import SpreadSheet from "./SpreadSheet";
-export default function Page({ view, vars, data }) {
+import SpreadSheet from "../spreadsheet/SpreadSheet";
+export default function Page({ view, vars, data, whichCountry }) {
 
   // const [vars, setVars] = useState(undefined);
 
@@ -19,7 +19,7 @@ export default function Page({ view, vars, data }) {
       <main>
         {/* <p>{JSON.stringify(data, null, 2)}</p> */}
         <Graph />
-        <SpreadSheet data={data} />
+        <SpreadSheet data={data} whichCountry={whichCountry} />
       </main>
     </div>
   )
