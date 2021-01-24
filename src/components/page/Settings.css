@@ -1,0 +1,33 @@
+#settings-box {
+  position: fixed;
+  height: 200px;
+  width: 800px;
+  bottom: 40px;
+  left: 0px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  transition: 0.4s ease-in-out;
+}
+
+#controls {
+  padding: 4px;
+}
+
+#arrow_click {
+  height: 100%;
+  width: 30px;
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: large;
+  cursor: pointer;
+}
+
+#arrow_click:hover {
+  background-color: firebrick;
+  color: white;
+}
