@@ -14,10 +14,10 @@ import {
   // getDataType,
   // everyDay,
 } from "./js/utilities";
-import { data, movingAverage, getColours, getDifference } from "./js/chartParts";
+import { /* data, */ movingAverage, getColours, getDifference } from "./js/chartParts";
 // import barChart from "./js/barChart";
 
-function BarChart({ vars, type }) {
+function BarChart({ vars, type, data }) {
 
   const width = 600;
   const height = 400;
@@ -54,7 +54,7 @@ function BarChart({ vars, type }) {
       const fontWeight = 700;
 
 
-      const step = 1; //vars.bc_step;
+      const step = 10; //vars.bc_step;
 
       const tickVals = divideTicks(data, step);
       const dateFormat = "%d %b";
@@ -63,24 +63,16 @@ function BarChart({ vars, type }) {
 
       const x = d3
         .scaleLinear()
-        .range([0, width - margin.right - margin.left])
-        .domain(d3.extent(data, d => parseTime(d.date)));
-      // const x = d3
-      //   .scaleBand()
-      //   .domain(data.map((d) => d.date))
-      //   .rangeRound([margin.left, width - margin.right])
-      //   .padding(0.1);
+        .rangeRound([0, width - margin.right - margin.left])
+        .domain(d3.extent(data, d => parseTime(d.date)))
+        .nice();
 
       const y1 = d3
         .scaleLinear()
-        .range([elH, margin.top])
+        .rangeRound([elH, margin.top])
         .domain([0, d3.max(difference)])
         .nice();
 
-      // const y1 = d3
-      //   .scaleLinear()
-      //   .domain([0, d3.max(data, (d) => d.sales)])
-      //   .rangeRound([height - margin.bottom, margin.top]);
 
       const xAxis = (g) =>
         g
@@ -93,8 +85,7 @@ function BarChart({ vars, type }) {
             .axisBottom(x)
             .tickFormat(d3.timeFormat(dateFormat))
             .tickValues(tickVals)
-            // .tickSize(3)
-            // .tickSizeOuter(0)
+            .tickSizeOuter(0)
           )
       // .selectAll(".tick text")
       // .attr("transform", function (d) {
@@ -109,8 +100,10 @@ function BarChart({ vars, type }) {
           .style("color", "white")
           .style("font-family", fontFamily)
           .attr("font-weight", fontWeight)
-          .call(d3.axisLeft(y1).ticks(null, "s"))
-          .call((g) => g.select(".domain").remove())
+          .call(d3.axisLeft(y1)
+            .ticks(null, "s")
+          )
+          // .call((g) => g.select(".domain").remove())
           .call((g) =>
             g
               .append("text")
@@ -121,9 +114,23 @@ function BarChart({ vars, type }) {
               .text(data.y1)
           );
 
+      const y2Axis = (g) =>
+        g
+          .attr("transform", `translate(${margin.left}, 0)`)
+          .style("color", "white")
+          .style("font-family", fontFamily)
+          .attr("font-weight", fontWeight)
+          .style("stroke-width", 0.5)
+          .style("opacity", 0.4)
+          .call(d3.axisLeft(y1)
+            .scale(y1)
+            .tickSize(-elW)
+            .tickFormat("")
+          )
+
       svg.select(".x-axis").call(xAxis);
       svg.select(".y-axis").call(y1Axis);
-      // svg.select(".y-axis-lines").call(y2Axis);
+      svg.select(".y-axis-lines").call(y2Axis);
 
       svg
         .select(".plot-area")
@@ -143,21 +150,23 @@ function BarChart({ vars, type }) {
   );
 
   return (
-    <svg
-      ref={ref}
-      style={{
-        border: "1px solid black",
-        height: height,
-        width: width,
-        // marginRight: "0px",
-        // marginLeft: "0px",
-      }}
-    >
-      <g className="plot-area" />
-      <g className="x-axis" />
-      <g className="y-axis" />
-      <g className="y-axis-lines" />
-    </svg>
+    <div style={{ backgroundColor: 'grey' }}>
+      <svg
+        ref={ref}
+        style={{
+          border: "1px solid black",
+          height: height,
+          width: width,
+          // marginRight: "0px",
+          // marginLeft: "0px",
+        }}
+      >
+        <g className="plot-area" />
+        <g className="x-axis" />
+        <g className="y-axis" />
+        <g className="y-axis-lines" />
+      </svg>
+    </div>
   );
 }
 
