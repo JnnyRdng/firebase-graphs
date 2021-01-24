@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import "./Page.css";
 import Graph from "./Graph";
 import SpreadSheet from "./SpreadSheet";
-export default function Page({ view, vars }) {
+import { Button, Slider } from "../ui/UIElements";
+export default function Page({ view, vars, data }) {
 
   // const [vars, setVars] = useState(undefined);
 
@@ -15,9 +16,12 @@ export default function Page({ view, vars }) {
   return (
     <div id="contents">
       <h2>{view.toUpperCase()}</h2>
-      <p>{JSON.stringify(vars)}</p>
-      <Graph />
-      <SpreadSheet />
+      {/* <p>{JSON.stringify(vars)}</p> */}
+      <main style={{ backgroundColor: "#ff0000" }}>
+        {/* <p>{JSON.stringify(data, null, 2)}</p> */}
+        <Graph />
+        <SpreadSheet />
+      </main>
     </div>
   )
 }

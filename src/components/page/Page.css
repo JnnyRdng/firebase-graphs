@@ -1,6 +1,8 @@
 #contents {
   /* background-color: blue; */
   padding: 20px;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 #contents>h2 {
