@@ -1,6 +1,7 @@
-import app from "firebase/app";
+import firebase from 'firebase'
+import 'firebase/database';
 
-const firebaseConfig = {
+const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -10,10 +11,5 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID
 };
 
-class Firebase {
-  constructor() {
-    app.initializeApp(firebaseConfig);
-  }
-}
-
-export default Firebase;
+var fire = firebase.initializeApp(config);
+export default fire;
