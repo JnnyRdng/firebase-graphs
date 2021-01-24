@@ -19,11 +19,6 @@ function App() {
     });
   }, []);
 
-  const serveData = () => {
-    if (view === "uk") return ukData;
-    return {};
-  }
-
   return (
     <div className="App">
       <header id="header">
@@ -31,8 +26,11 @@ function App() {
         <Button click={() => setView("vaccines")} text="Vaccines" view={view} size="large" />
         <Button click={() => setView("world")} text="World" view={view} size="large" />
       </header>
-      {view && (
-        <Page view={view} vars={vars} data={serveData()} />
+      {view === "uk" && (
+        <Page view={view} vars={vars} data={ukData} />
+      )}
+      {view === "world" && (
+        <Page view={view} vars={vars} data={{}} />
       )}
     </div>
   );

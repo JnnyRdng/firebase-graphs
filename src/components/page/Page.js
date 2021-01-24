@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import "./Page.css";
 import Graph from "./Graph";
 import SpreadSheet from "./SpreadSheet";
+import Settings from "./Settings";
 import { Button, Slider } from "../ui/UIElements";
 export default function Page({ view, vars, data }) {
 
@@ -17,11 +18,12 @@ export default function Page({ view, vars, data }) {
     <div id="contents">
       <h2>{view.toUpperCase()}</h2>
       {/* <p>{JSON.stringify(vars)}</p> */}
-      <main style={{ backgroundColor: "#ff0000" }}>
+      <main>
         {/* <p>{JSON.stringify(data, null, 2)}</p> */}
         <Graph />
-        <SpreadSheet />
+        <SpreadSheet data={data} />
       </main>
+      <Settings vars={vars} />
     </div>
   )
 }
