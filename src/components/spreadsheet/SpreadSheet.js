@@ -4,7 +4,7 @@ import "./SpreadSheet.css";
 import Handsontable from 'handsontable';
 import { useEffect, useState } from 'react';
 
-export default function SpreadSheet({ data }) {
+export default function SpreadSheet({ data, whichCountry }) {
 
   const [cells, setCells] = useState([[]]);
 
@@ -60,9 +60,15 @@ export default function SpreadSheet({ data }) {
       }
     }
   }
+  const formatName = (name) => {
+    name = name.replace(/_/g, " ");
+    return name.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
+  }
+
   return (
-    <>
+    <div>
+      <h2 id="spreadsheet_title">{formatName(whichCountry)}</h2>
       <HotTable className="spreadsheet" settings={settings} />
-    </>
+    </div>
   );
 }

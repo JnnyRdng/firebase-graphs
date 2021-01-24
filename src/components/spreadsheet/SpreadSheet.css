@@ -1,4 +1,11 @@
 .spreadsheet {
   font-family: 'Courier New', Courier, monospace;
   font-size: small;
+  /* top: -30px; */
+}
+
+#spreadsheet_title {
+  margin: 0px;
+  position: relative;
+  /* top: -30px; */
 }
